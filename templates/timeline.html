@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Vaqt jadvali{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Yutuqlarimning vaqt jadvali</h1>
+        <p class="text-muted">Har bir yil yangi marralar bilan to'la. Vaqt bo'ylab muvaffaqiyatlarimni kuzating.</p>
+    </div>
+    <div class="timeline">
+        {% for year, entries in timeline %}
+            <div class="timeline-year">
+                <h3>{{ year }}</h3>
+                {% for achievement in entries %}
+                    <div class="timeline-card">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="badge bg-primary mb-2">{{ achievement.get_category_display }}</span>
+                            <h4><a href="{% url 'achievements:detail' achievement.slug %}">{{ achievement.title }}</a></h4>
+                            <p class="text-muted mb-2">{{ achievement.short_description }}</p>
+                            <small class="text-secondary">
+                                {{ achievement.date|date:"d MMMM" }}
+                                {% if achievement.location %} · {{ achievement.location }}{% endif %}
+                                {% if achievement.organization %} · {{ achievement.organization }}{% endif %}
+                            </small>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% empty %}
+            <p class="text-muted">Hozircha vaqt jadvalida ko'rsatkichlar mavjud emas.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}{{ achievement.title }}{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <article class="card shadow-sm border-0">
+                {% if achievement.image %}
+                    <img src="{{ achievement.image.url }}" class="card-img-top" alt="{{ achievement.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <span class="badge bg-primary mb-3">{{ achievement.get_category_display }}</span>
+                    <h1 class="fw-bold">{{ achievement.title }}</h1>
+                    <p class="text-muted">{{ achievement.short_description }}</p>
+                    <hr>
+                    <p>{{ achievement.description|linebreaks }}</p>
+                    <ul class="list-inline">
+                        {% if achievement.date %}
+                            <li class="list-inline-item"><strong>Sana:</strong> {{ achievement.date|date:"d MMMM Y" }}</li>
+                        {% endif %}
+                        {% if achievement.location %}
+                            <li class="list-inline-item"><strong>Joy:</strong> {{ achievement.location }}</li>
+                        {% endif %}
+                        {% if achievement.organization %}
+                            <li class="list-inline-item"><strong>Tashkilot:</strong> {{ achievement.organization }}</li>
+                        {% endif %}
+                    </ul>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        {% for tech in achievement.technologies.all %}
+                            <span class="badge bg-secondary-subtle text-secondary">{{ tech.name }}</span>
+                        {% empty %}
+                            <span class="text-muted">Texnologiyalar qo'shilmagan.</span>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        {% if achievement.file %}
+                            <a href="{{ achievement.file.url }}" class="btn btn-outline-primary" download>Faylni yuklab olish</a>
+                        {% endif %}
+                        {% if achievement.external_link %}
+                            <a href="{{ achievement.external_link }}" class="btn btn-primary" target="_blank" rel="noopener">Tashqi havola</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Teglar</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for tag in achievement.tags.all %}
+                            <span class="badge bg-dark-subtle text-dark">{{ tag.name }}</span>
+                        {% empty %}
+                            <span class="text-muted">Teglar mavjud emas.</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">O'xshash yutuqlar</h5>
+                    <ul class="list-group list-group-flush">
+                        {% for item in related %}
+                            <li class="list-group-item">
+                                <a href="{% url 'achievements:detail' item.slug %}" class="text-decoration-none">{{ item.title }}</a>
+                                <div class="small text-muted">{{ item.date|date:"Y" }} · {{ item.get_category_display }}</div>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item text-muted">O'xshash natijalar topilmadi.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

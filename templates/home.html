@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Bosh sahifa{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <p class="text-uppercase text-primary fw-bold mb-2">Salom, men Dasturchiman < /></p>
+            <h1 class="display-5 fw-bold mb-3">Yutuqlarim va innovatsion loyihalarim</h1>
+            <p class="lead text-muted">Texnologiyalar, ilmiy izlanishlar va ijodiy yechimlar orqali o'zgarish uyg'otish uchun yaratilgan portfel.</p>
+            <div class="d-flex gap-3 mt-4">
+                <a href="{% url 'achievements:list' %}" class="btn btn-primary btn-lg">Yutuqlarni ko'rish</a>
+                <a href="{% url 'contact' %}" class="btn btn-outline-secondary btn-lg">Bog'lanish</a>
+            </div>
+        </div>
+        <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="hero-card p-4 shadow-sm rounded bg-white">
+                <h5 class="text-secondary text-uppercase">Qisqa ma'lumot</h5>
+                <p class="mb-1"><strong>Mutaxassislik:</strong> Dasturiy ta'minot muhandisi</p>
+                <p class="mb-1"><strong>Yo'nalish:</strong> Veb dasturlash, sun'iy intellekt, ma'lumotlar tahlili</p>
+                <p class="mb-0"><strong>Shior:</strong> "Yutuqlar — bu muntazam intizom natijasi"</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-white py-5 border-top border-bottom">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="stat-card shadow-sm p-4 h-100">
+                    <h3 class="display-5 text-primary">{{ stats.total }}</h3>
+                    <p class="text-muted mb-0">Umumiy yutuqlar</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card shadow-sm p-4 h-100">
+                    <h3 class="display-5 text-primary">{{ stats.projects }}</h3>
+                    <p class="text-muted mb-0">Innovatsion loyihalar</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card shadow-sm p-4 h-100">
+                    <h3 class="display-5 text-primary">{{ stats.certificates }}</h3>
+                    <p class="text-muted mb-0">Sertifikatlangan muvaffaqiyatlar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0">Tanlangan yutuqlar</h2>
+        <a href="{% url 'achievements:list' %}" class="text-decoration-none">Barcha yutuqlar →</a>
+    </div>
+    <div class="row g-4">
+        {% for achievement in featured %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    {% if achievement.image %}
+                        <img src="{{ achievement.image.url }}" class="card-img-top" alt="{{ achievement.title }}">
+                    {% else %}
+                        <div class="placeholder-img d-flex align-items-center justify-content-center text-muted">
+                            Rasmlar yo'q
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <span class="badge bg-primary-subtle text-primary">{{ achievement.get_category_display }}</span>
+                        <h5 class="card-title mt-2">{{ achievement.title }}</h5>
+                        <p class="card-text text-muted">{{ achievement.short_description }}</p>
+                        <a href="{% url 'achievements:detail' achievement.slug %}" class="btn btn-outline-primary w-100">Batafsil</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">Tanlangan yutuqlar hali kiritilmagan.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

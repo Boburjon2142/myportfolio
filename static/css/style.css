@@ -1,0 +1,91 @@
+:root {
+    --primary: #0d6efd;
+}
+
+body {
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+    background-color: #f8f9fa;
+}
+
+.hero-card {
+    border-left: 4px solid var(--primary);
+}
+
+.stat-card {
+    border-radius: 1rem;
+}
+
+.placeholder-img {
+    min-height: 200px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #eee;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline:before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(13, 110, 253, 0.5), rgba(13, 110, 253, 0.1));
+}
+
+.timeline-year {
+    margin-bottom: 2rem;
+}
+
+.timeline-card {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -26px;
+    top: 10px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px rgba(13, 110, 253, 0.2);
+}
+
+.timeline-content {
+    background: #fff;
+    border-radius: 0.75rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.skill-card .progress-bar {
+    background: linear-gradient(90deg, var(--primary), #6610f2);
+}
+
+.scroll-top {
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .timeline {
+        padding-left: 1rem;
+    }
+
+    .timeline:before {
+        left: 8px;
+    }
+
+    .timeline-card {
+        padding-left: 1.5rem;
+    }
+
+    .timeline-dot {
+        left: -20px;
+    }
+}

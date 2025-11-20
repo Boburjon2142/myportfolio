@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Ko'nikmalar{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <h1 class="fw-bold">Mutaxassislik ko'nikmalari</h1>
+            <p class="text-muted">Strategik muammolarni hal qilish uchun texnik va yumshoq ko'nikmalarning uyg'unligi.</p>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Ajratilgan ko'nikmalar</h5>
+                    <ul class="list-unstyled mb-0">
+                        {% for skill in highlighted %}
+                            <li class="d-flex justify-content-between py-2 border-bottom">
+                                <span>{{ skill.name }}</span>
+                                <strong>{{ skill.level }}%</strong>
+                            </li>
+                        {% empty %}
+                            <li class="text-muted">Hali tanlangan ko'nikmalar mavjud emas.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for category, skills in skills_by_category.items %}
+        <div class="mb-5">
+            <h3 class="mb-3">{{ category }}</h3>
+            <div class="row g-4">
+                {% for skill in skills %}
+                    <div class="col-md-6">
+                        <div class="skill-card p-3 border rounded bg-white shadow-sm">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="fw-semibold">{{ skill.name }}</span>
+                                <span>{{ skill.level }}%</span>
+                            </div>
+                            <div class="progress" style="height:8px;">
+                                <div class="progress-bar" role="progressbar" style="width: {{ skill.level }}%;" aria-valuenow="{{ skill.level }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="text-muted">Bu toifada hali ko'nikmalar yaratilmagan.</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-muted">Ko'nikmalar ro'yxati bo'sh.</p>
+    {% endfor %}
+</section>
+{% endblock %}
