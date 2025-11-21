@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
 <header class="neo-hero text-white text-center">
     <div class="container hero-inner">
-        <div class="hero-avatar">
-            <i class="fas fa-code"></i>
+        <div class="hero-avatar" style="background-image: url('{% static 'images/avatar.jpg' %}');">
+            <img src="{% static 'images/avatar.jpg' %}" alt="Avatar">
         </div>
         <h1 class="hero-title">Boburjon Akramjonovich</h1>
         <p class="hero-subtitle">Hi, I’m a software engineer <span class="accent">&lt; / &gt;</span></p>
