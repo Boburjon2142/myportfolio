@@ -1,5 +1,9 @@
+from io import BytesIO
+
+from django.core.files.base import ContentFile
 from django.db import models
 from django.utils.text import slugify
+from PIL import Image
 
 
 class Technology(models.Model):
@@ -60,6 +64,22 @@ class Achievement(models.Model):
     def __str__(self):
         return self.title
 
+    def _compress_image(self):
+        """Shrink uploaded image size for storage."""
+        if not self.image:
+            return
+        img = Image.open(self.image)
+        img = img.convert("RGB")
+        max_width = 1400
+        if img.width > max_width:
+            ratio = max_width / float(img.width)
+            img = img.resize((max_width, int(img.height * ratio)), Image.LANCZOS)
+        buffer = BytesIO()
+        img.save(buffer, format="JPEG", optimize=True, quality=75)
+        buffer.seek(0)
+        file_name = f"{self.slug or slugify(self.title)}.jpg"
+        self.image.save(file_name, ContentFile(buffer.read()), save=False)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             base_slug = slugify(self.title)
@@ -69,6 +89,11 @@ class Achievement(models.Model):
                 slug = f"{base_slug}-{counter}"
                 counter += 1
             self.slug = slug
+        if self.image:
+            try:
+                self._compress_image()
+            except Exception:
+                pass
         super().save(*args, **kwargs)
 
 

@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Portfel{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-cn7F0p8BiG6kGx1d6dkprdFM5/hTyTX0bY4Z1cdq9VHtVHCnRvWmvMRGsiE232zraFMvx6bM6uR9V0lKkZ8BNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
-        <a class="navbar-brand fw-bold text-primary" href="{% url 'home' %}">Boburjon Akramjonovich</a>
+        <a class="navbar-brand fw-bold text-primary" href="{% url 'home' %}">Boburjon</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,9 +45,22 @@
 </main>
 
 <footer class="bg-dark text-white mt-5 py-4">
-    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <p class="mb-0">© {% now "Y" %} Portfolio. Barcha huquqlar himoyalangan.</p>
-        <a href="#" class="text-white-50 small scroll-top">Yuqoriga qaytish ↑</a>
+    <div class="container">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-6">
+                <p class="mb-1 fw-semibold">Bog'lanish</p>
+                <div class="footer-links d-flex flex-wrap gap-3">
+                    <a href="https://t.me/TrBoburjon" target="_blank" rel="noopener" class="text-white-50" style="text-decoration:none">Telegram</a>
+                    <a href="https://www.upwork.com/freelancers/~011c45190284ab418e?mp_source=share" target="_blank" rel="noopener" class="text-white-50" style="text-decoration:none">Upwork</a>
+                    <a href="https://github.com/Boburjon2142" target="_blank" rel="noopener" class="text-white-50" style="text-decoration:none">GitHub</a>
+                    <a href="https://www.linkedin.com/in/boburjon-abdug-aniyev-367491370" target="_blank" rel="noopener" class="text-white-50" style="text-decoration:none">LinkedIn</a>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-md-end justify-content-start gap-3">
+                <p class="mb-0 small text-white-50">© {% now "Y" %} Portfolio. Barcha huquqlar himoyalangan.</p>
+                <a href="#" class="text-white-50 small scroll-top" style="text-decoration:none">Yuqoriga qaytish ↑</a>
+            </div>
+        </div>
     </div>
 </footer>
 

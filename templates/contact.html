@@ -3,34 +3,72 @@
 {% block title %}Aloqa{% endblock %}
 
 {% block content %}
-<section class="container py-5">
-    <div class="row align-items-center">
-        <div class="col-lg-6 mb-4 mb-lg-0">
-            <h1 class="fw-bold">Bog'lanish</h1>
-            <p class="text-muted">Savollar, hamkorlik takliflari yoki fikrlar uchun quyidagi formani to'ldiring. Har bir xabar e'tibor bilan ko'rib chiqiladi.</p>
-            <ul class="list-unstyled">
-                <li class="mb-2">📧 Email: hello@example.com</li>
-                <li class="mb-2">📍 Manzil: Toshkent, O'zbekiston</li>
-                <li class="mb-0">🌐 Tarmoqlar: LinkedIn, GitHub, Telegram</li>
-            </ul>
+<header class="contact-hero text-white text-center">
+    <div class="container">
+        <h1 class="mb-2">Boburjon Akramjonovich</h1>
+        <p class="hero-subtitle">Savollar, hamkorlik takliflari yoki fikrlar uchun xabar qoldiring. Har bir murojaat e'tibor bilan o'qiladi.</p>
+        <div class="nav-links">
+            <a href="{% url 'home' %}" class="nav-link">Bosh sahifa</a>
+            <a href="{% url 'achievements:list' %}" class="nav-link">Yutuqlar</a>
+            <a href="{% url 'timeline' %}" class="nav-link">Vaqt jadvali</a>
+            <a href="{% url 'skills' %}" class="nav-link">Ko'nikmalar</a>
         </div>
-        <div class="col-lg-6">
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4">
-                    <form method="post" novalidate>
-                        {% csrf_token %}
-                        {% for field in form %}
-                            <div class="mb-3">
-                                <label class="form-label">{{ field.label }}</label>
-                                {{ field }}
-                                {% if field.errors %}
-                                    <div class="text-danger small">{{ field.errors|striptags }}</div>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                        <button type="submit" class="btn btn-primary w-100">Xabarni yuborish</button>
-                    </form>
+    </div>
+</header>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2 class="section-title">Bog'lanish</h2>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p>hello@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-text">
+                            <h3>Manzil</h3>
+                            <p>Toshkent, O'zbekiston</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-share-alt"></i></div>
+                        <div class="contact-text">
+                            <h3>Ijtimoiy tarmoqlar</h3>
+                            <p>LinkedIn, GitHub, Telegram</p>
+                        </div>
+                    </div>
                 </div>
+                <div class="social-contact">
+                    <h3 class="social-title">Tarmoqlarda kuzatib boring</h3>
+                    <div class="social-links">
+                        <a href="https://t.me/TrBoburjon" class="social-link" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+                        <a href="https://www.upwork.com/freelancers/~011c45190284ab418e?mp_source=share" class="social-link" target="_blank" rel="noopener"><i class="fa fa-briefcase"></i></a>
+                        <a href="https://github.com/Boburjon2142" class="social-link" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/boburjon-abdug-aniyev-367491370" class="social-link" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h2 class="section-title">Xabar yuborish</h2>
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors|striptags }}</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-block">Xabarni yuborish</button>
+                </form>
             </div>
         </div>
     </div>

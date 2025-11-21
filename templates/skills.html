@@ -3,53 +3,81 @@
 {% block title %}Ko'nikmalar{% endblock %}
 
 {% block content %}
-<section class="container py-5">
-    <div class="row mb-5">
-        <div class="col-lg-8">
-            <h1 class="fw-bold">Mutaxassislik ko'nikmalari</h1>
-            <p class="text-muted">Strategik muammolarni hal qilish uchun texnik va yumshoq ko'nikmalarning uyg'unligi.</p>
-        </div>
-        <div class="col-lg-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Ajratilgan ko'nikmalar</h5>
-                    <ul class="list-unstyled mb-0">
-                        {% for skill in highlighted %}
-                            <li class="d-flex justify-content-between py-2 border-bottom">
-                                <span>{{ skill.name }}</span>
-                                <strong>{{ skill.level }}%</strong>
-                            </li>
-                        {% empty %}
-                            <li class="text-muted">Hali tanlangan ko'nikmalar mavjud emas.</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
+<header class="skills-hero text-white text-center">
+    <div class="container">
+        <h1 class="mb-3">Mutaxassislik Ko'nikmalari</h1>
+        <p class="hero-subtitle">Strategik muammolarni hal qilish uchun texnik va yumshoq ko'nikmalarning uyg'unligi.</p>
     </div>
-    {% for category, skills in skills_by_category.items %}
-        <div class="mb-5">
-            <h3 class="mb-3">{{ category }}</h3>
-            <div class="row g-4">
-                {% for skill in skills %}
-                    <div class="col-md-6">
-                        <div class="skill-card p-3 border rounded bg-white shadow-sm">
-                            <div class="d-flex justify-content-between mb-1">
-                                <span class="fw-semibold">{{ skill.name }}</span>
-                                <span>{{ skill.level }}%</span>
+</header>
+
+<section class="skills-section">
+    <div class="container">
+        <div class="skills-grid">
+            {% for category, skills in skills_by_category.items %}
+                <div class="skill-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            {% if "Backend" in category %}
+                                <i class="fas fa-server"></i>
+                            {% elif "Front" in category %}
+                                <i class="fas fa-code"></i>
+                            {% elif "Ma'lumot" in category %}
+                                <i class="fas fa-database"></i>
+                            {% elif "DevOps" in category %}
+                                <i class="fas fa-cloud"></i>
+                            {% else %}
+                                <i class="fas fa-layer-group"></i>
+                            {% endif %}
+                        </div>
+                        <h3 class="category-title">{{ category }}</h3>
+                    </div>
+                    {% for skill in skills %}
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">{{ skill.name }}</span>
+                                <span class="skill-percentage">{{ skill.level }}%</span>
                             </div>
-                            <div class="progress" style="height:8px;">
-                                <div class="progress-bar" role="progressbar" style="width: {{ skill.level }}%;" aria-valuenow="{{ skill.level }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-percentage="{{ skill.level }}"></div>
                             </div>
                         </div>
+                    {% empty %}
+                        <p class="text-muted mb-0">Bu toifada hali ko'nikmalar mavjud emas.</p>
+                    {% endfor %}
+                </div>
+            {% empty %}
+                <p class="text-muted">Ko'nikmalar ro'yxati bo'sh.</p>
+            {% endfor %}
+        </div>
+
+        <div class="featured-skills">
+            <h2 class="section-title">Ajratilgan Ko'nikmalar</h2>
+            <div class="featured-grid">
+                {% for skill in highlighted %}
+                    <div class="featured-skill">
+                        <div class="featured-icon">
+                            {% if "Python" in skill.name %}
+                                <i class="fab fa-python"></i>
+                            {% elif "Django" in skill.name %}
+                                <i class="fas fa-bolt"></i>
+                            {% elif "HTML" in skill.name %}
+                                <i class="fab fa-html5"></i>
+                            {% elif "CSS" in skill.name %}
+                                <i class="fab fa-css3-alt"></i>
+                            {% elif "JavaScript" in skill.name %}
+                                <i class="fab fa-js-square"></i>
+                            {% else %}
+                                <i class="fas fa-star"></i>
+                            {% endif %}
+                        </div>
+                        <h3 class="featured-name">{{ skill.name }}</h3>
+                        <div class="featured-percentage">{{ skill.level }}%</div>
                     </div>
                 {% empty %}
-                    <p class="text-muted">Bu toifada hali ko'nikmalar yaratilmagan.</p>
+                    <p class="text-muted text-center w-100">Ajratilgan ko'nikmalar belgilanmagan.</p>
                 {% endfor %}
             </div>
         </div>
-    {% empty %}
-        <p class="text-muted">Ko'nikmalar ro'yxati bo'sh.</p>
-    {% endfor %}
+    </div>
 </section>
 {% endblock %}

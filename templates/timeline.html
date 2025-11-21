@@ -3,34 +3,50 @@
 {% block title %}Vaqt jadvali{% endblock %}
 
 {% block content %}
-<section class="container py-5">
-    <div class="text-center mb-5">
-        <h1 class="fw-bold">Yutuqlarimning vaqt jadvali</h1>
-        <p class="text-muted">Har bir yil yangi marralar bilan to'la. Vaqt bo'ylab muvaffaqiyatlarimni kuzating.</p>
+<header class="timeline-hero text-white text-center">
+    <div class="container">
+        <h1 class="mb-3">Yutuqlar Vaqt Jadvali</h1>
+        <p class="hero-subtitle">Har bir yil yangi marralar bilan to'la. Vaqt bo'yicha muvaffaqiyatlarimni kuzating.</p>
     </div>
-    <div class="timeline">
-        {% for year, entries in timeline %}
-            <div class="timeline-year">
-                <h3>{{ year }}</h3>
-                {% for achievement in entries %}
-                    <div class="timeline-card">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="badge bg-primary mb-2">{{ achievement.get_category_display }}</span>
-                            <h4><a href="{% url 'achievements:detail' achievement.slug %}">{{ achievement.title }}</a></h4>
-                            <p class="text-muted mb-2">{{ achievement.short_description }}</p>
-                            <small class="text-secondary">
-                                {{ achievement.date|date:"d MMMM" }}
-                                {% if achievement.location %} · {{ achievement.location }}{% endif %}
-                                {% if achievement.organization %} · {{ achievement.organization }}{% endif %}
-                            </small>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% empty %}
-            <p class="text-muted">Hozircha vaqt jadvalida ko'rsatkichlar mavjud emas.</p>
-        {% endfor %}
+</header>
+
+<section class="timeline-section">
+    <div class="container">
+        <div class="timeline-modern">
+            {% for year, entries in timeline %}
+                <div class="year-group">
+                    <div class="year-label">{{ year }}</div>
+                    {% for achievement in entries %}
+                        <article class="achievement-card {% if forloop.counter0|divisibleby:2 %}left{% else %}right{% endif %}">
+                            <span class="achievement-date">{{ achievement.date|date:"d MMMM" }}</span>
+                            <h3 class="achievement-title">{{ achievement.title }}</h3>
+                            <p class="achievement-description">{{ achievement.short_description }}</p>
+                            <div class="achievement-meta">
+                                {% if achievement.location %}<i class="fas fa-map-marker-alt"></i><span>{{ achievement.location }}</span>{% endif %}
+                                {% if achievement.organization %}<span class="ms-2">· {{ achievement.organization }}</span>{% endif %}
+                            </div>
+                            <div class="achievement-icon">
+                                {% if achievement.category == "AWARD" %}
+                                    <i class="fas fa-trophy"></i>
+                                {% elif achievement.category == "CERTIFICATE" %}
+                                    <i class="fas fa-certificate"></i>
+                                {% elif achievement.category == "PROJECT" %}
+                                    <i class="fas fa-code"></i>
+                                {% elif achievement.category == "COMPETITION" %}
+                                    <i class="fas fa-award"></i>
+                                {% elif achievement.category == "RESEARCH" %}
+                                    <i class="fas fa-flask"></i>
+                                {% else %}
+                                    <i class="fas fa-star"></i>
+                                {% endif %}
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% empty %}
+                <p class="text-muted text-center">Hozircha vaqt jadvalida ko'rsatkichlar mavjud emas.</p>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endblock %}
