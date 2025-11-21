@@ -107,7 +107,7 @@ def contact_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Xabaringiz muvaffaqiyatli yuborildi!")
+            messages.success(request, "Your message has been sent successfully!")
             return redirect("contact")
     else:
         form = ContactForm()

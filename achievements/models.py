@@ -30,14 +30,14 @@ class Tag(models.Model):
 
 class Achievement(models.Model):
     CATEGORY_CHOICES = [
-        ("EDUCATION", "Ta'lim"),
-        ("CERTIFICATE", "Sertifikat"),
-        ("PROJECT", "Loyiha"),
-        ("COMPETITION", "Tanlov"),
-        ("PUBLICATION", "Nashr"),
-        ("AWARD", "Mukofot"),
-        ("RESEARCH", "Tadqiqot"),
-        ("OTHER", "Boshqa"),
+        ("EDUCATION", "Education"),
+        ("CERTIFICATE", "Certificate"),
+        ("PROJECT", "Project"),
+        ("COMPETITION", "Competition"),
+        ("PUBLICATION", "Publication"),
+        ("AWARD", "Award"),
+        ("RESEARCH", "Research"),
+        ("OTHER", "Other"),
     ]
 
     title = models.CharField(max_length=255)

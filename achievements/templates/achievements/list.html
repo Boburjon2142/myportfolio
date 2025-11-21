@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Yutuqlar{% endblock %}
+{% block title %}Achievements{% endblock %}
 
 {% block content %}
 <header class="gallery-hero text-white text-center">
     <div class="container">
-        <h1 class="mb-3">Yutuqlar Galereyasi</h1>
-        <p class="hero-subtitle">Natijalarni turkumlar, yillar va texnologiyalar orqali filtrlab ko'ring.</p>
+        <h1 class="mb-3">Achievements Gallery</h1>
+        <p class="hero-subtitle">Filter results by category, year, and technology.</p>
     </div>
 </header>
 
@@ -15,44 +15,44 @@
         <form method="get" class="filter-card">
             <div class="search-container">
                 <div class="search-box">
-                    <input type="search" class="search-input" name="search" placeholder="Kalit so'z" value="{{ filters.search }}" data-debounce="true">
+                    <input type="search" class="search-input" name="search" placeholder="Keyword" value="{{ filters.search }}" data-debounce="true">
                     <div class="search-icon"><i class="fas fa-search"></i></div>
                 </div>
             </div>
             <div class="filter-container">
                 <div class="filter-group">
-                    <label class="filter-label">Kategoriya</label>
+                    <label class="filter-label">Category</label>
                     <select name="category" class="filter-select">
-                        <option value="">Barcha kategoriyalar</option>
+                        <option value="">All categories</option>
                         {% for value, label in categories %}
                             <option value="{{ value }}" {% if filters.category == value %}selected{% endif %}>{{ label }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label">Yil</label>
+                    <label class="filter-label">Year</label>
                     <select name="year" class="filter-select">
-                        <option value="">Barcha yillar</option>
+                        <option value="">All years</option>
                         {% for item in years %}
                             <option value="{{ item }}" {% if filters.year == item|stringformat:"s" %}selected{% endif %}>{{ item }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label">Texnologiya</label>
+                    <label class="filter-label">Technology</label>
                     <select name="technology" class="filter-select">
-                        <option value="">Barcha texnologiyalar</option>
+                        <option value="">All technologies</option>
                         {% for technology in technologies %}
                             <option value="{{ technology.slug }}" {% if filters.technology == technology.slug %}selected{% endif %}>{{ technology.name }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="filter-group align-self-end">
-                    <button class="filter-btn" type="submit"><i class="fas fa-filter me-1"></i>Filtrlash</button>
+                    <button class="filter-btn" type="submit"><i class="fas fa-filter me-1"></i>Filter</button>
                 </div>
             </div>
             <div class="filter-tags">
-                <span class="filter-tag {% if not filters.category %}active{% endif %}" data-filter="">Barchasi</span>
+                <span class="filter-tag {% if not filters.category %}active{% endif %}" data-filter="">All</span>
                 {% for value, label in categories %}
                     <span class="filter-tag {% if filters.category == value %}active{% endif %}" data-filter="{{ value }}">{{ label }}</span>
                 {% endfor %}
@@ -81,22 +81,22 @@
                     <span class="card-category {% if achievement.category == 'AWARD' %}mukofot{% elif achievement.category == 'CERTIFICATE' %}sertifikat{% elif achievement.category == 'COMPETITION' %}tanlov{% endif %}">{{ achievement.get_category_display }}</span>
                     <h3 class="card-title">{{ achievement.title }}</h3>
                     <p class="card-description">{{ achievement.short_description }}</p>
-                    <a href="{% url 'achievements:detail' achievement.slug %}" class="card-link">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    <a href="{% url 'achievements:detail' achievement.slug %}" class="card-link">View details <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
         {% empty %}
-            <p class="text-muted">Tanlangan filtrlar bo'yicha natija topilmadi.</p>
+            <p class="text-muted">No results for the selected filters.</p>
         {% endfor %}
     </div>
 
     {% if page_obj.has_other_pages %}
         <div class="pagination mt-4">
             {% if page_obj.has_previous %}
-                <a class="page-btn" href="?page={{ page_obj.previous_page_number }}{% if filters.search %}&search={{ filters.search }}{% endif %}{% if filters.category %}&category={{ filters.category }}{% endif %}{% if filters.year %}&year={{ filters.year }}{% endif %}{% if filters.technology %}&technology={{ filters.technology }}{% endif %}">Oldingi</a>
+                <a class="page-btn" href="?page={{ page_obj.previous_page_number }}{% if filters.search %}&search={{ filters.search }}{% endif %}{% if filters.category %}&category={{ filters.category }}{% endif %}{% if filters.year %}&year={{ filters.year }}{% endif %}{% if filters.technology %}&technology={{ filters.technology }}{% endif %}">Previous</a>
             {% endif %}
-            <span class="page-info">Sahifa {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+            <span class="page-info">Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
             {% if page_obj.has_next %}
-                <a class="page-btn" href="?page={{ page_obj.next_page_number }}{% if filters.search %}&search={{ filters.search }}{% endif %}{% if filters.category %}&category={{ filters.category }}{% endif %}{% if filters.year %}&year={{ filters.year }}{% endif %}{% if filters.technology %}&technology={{ filters.technology }}{% endif %}">Keyingi</a>
+                <a class="page-btn" href="?page={{ page_obj.next_page_number }}{% if filters.search %}&search={{ filters.search }}{% endif %}{% if filters.category %}&category={{ filters.category }}{% endif %}{% if filters.year %}&year={{ filters.year }}{% endif %}{% if filters.technology %}&technology={{ filters.technology }}{% endif %}">Next</a>
             {% endif %}
         </div>
     {% endif %}

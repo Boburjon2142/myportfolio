@@ -3,10 +3,11 @@
 {% block title %}Vaqt jadvali{% endblock %}
 
 {% block content %}
+{% load static %}
 <header class="timeline-hero text-white text-center">
     <div class="container">
-        <h1 class="mb-3">Yutuqlar Vaqt Jadvali</h1>
-        <p class="hero-subtitle">Har bir yil yangi marralar bilan to'la. Vaqt bo'yicha muvaffaqiyatlarimni kuzating.</p>
+        <h1 class="mb-3">Achievements Timeline</h1>
+        <p class="hero-subtitle">Each year brings new milestones. Track my progress over time.</p>
     </div>
 </header>
 
@@ -18,7 +19,7 @@
                     <div class="year-label">{{ year }}</div>
                     {% for achievement in entries %}
                         <article class="achievement-card {% if forloop.counter0|divisibleby:2 %}left{% else %}right{% endif %}">
-                            <span class="achievement-date">{{ achievement.date|date:"d MMMM" }}</span>
+                            <span class="achievement-date">{{ achievement.date|date:"d F Y" }}</span>
                             <h3 class="achievement-title">{{ achievement.title }}</h3>
                             <p class="achievement-description">{{ achievement.short_description }}</p>
                             <div class="achievement-meta">
@@ -44,7 +45,7 @@
                     {% endfor %}
                 </div>
             {% empty %}
-                <p class="text-muted text-center">Hozircha vaqt jadvalida ko'rsatkichlar mavjud emas.</p>
+                <p class="text-muted text-center">No timeline entries yet.</p>
             {% endfor %}
         </div>
     </div>

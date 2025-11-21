@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Aloqa{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block content %}
 <header class="contact-hero text-white text-center">
     <div class="container">
         <h1 class="mb-2">Boburjon Akramjonovich</h1>
-        <p class="hero-subtitle">Savollar, hamkorlik takliflari yoki fikrlar uchun xabar qoldiring. Har bir murojaat e'tibor bilan o'qiladi.</p>
+        <p class="hero-subtitle">Leave a note for questions, collaboration ideas, or feedback. Every message is read carefully.</p>
         <div class="nav-links">
-            <a href="{% url 'home' %}" class="nav-link">Bosh sahifa</a>
-            <a href="{% url 'achievements:list' %}" class="nav-link">Yutuqlar</a>
-            <a href="{% url 'timeline' %}" class="nav-link">Vaqt jadvali</a>
-            <a href="{% url 'skills' %}" class="nav-link">Ko'nikmalar</a>
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="{% url 'achievements:list' %}" class="nav-link">Achievements</a>
+            <a href="{% url 'timeline' %}" class="nav-link">Timeline</a>
+            <a href="{% url 'skills' %}" class="nav-link">Skills</a>
         </div>
     </div>
 </header>
@@ -20,32 +20,32 @@
     <div class="container">
         <div class="contact-grid">
             <div class="contact-info">
-                <h2 class="section-title">Bog'lanish</h2>
+                <h2 class="section-title">Contact</h2>
                 <div class="contact-details">
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div class="contact-text">
                             <h3>Email</h3>
-                            <p>hello@example.com</p>
+                            <p>boburjonabduganiyev83@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div class="contact-text">
-                            <h3>Manzil</h3>
-                            <p>Toshkent, O'zbekiston</p>
+                            <h3>Location</h3>
+                            <p>Tashkent, Uzbekistan</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-share-alt"></i></div>
                         <div class="contact-text">
-                            <h3>Ijtimoiy tarmoqlar</h3>
+                            <h3>Social profiles</h3>
                             <p>LinkedIn, GitHub, Telegram</p>
                         </div>
                     </div>
                 </div>
                 <div class="social-contact">
-                    <h3 class="social-title">Tarmoqlarda kuzatib boring</h3>
+                    <h3 class="social-title">Find me online</h3>
                     <div class="social-links">
                         <a href="https://t.me/TrBoburjon" class="social-link" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
                         <a href="https://www.upwork.com/freelancers/~011c45190284ab418e?mp_source=share" class="social-link" target="_blank" rel="noopener"><i class="fa fa-briefcase"></i></a>
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="contact-form">
-                <h2 class="section-title">Xabar yuborish</h2>
+                <h2 class="section-title">Send a message</h2>
                 <form method="post" novalidate>
                     {% csrf_token %}
                     {% for field in form %}
@@ -67,7 +67,7 @@
                             {% endif %}
                         </div>
                     {% endfor %}
-                    <button type="submit" class="btn btn-block">Xabarni yuborish</button>
+                    <button type="submit" class="btn btn-block">Send message</button>
                 </form>
             </div>
         </div>
